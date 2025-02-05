@@ -325,50 +325,8 @@
         </div>
     </div>
     </div>
-
     
-    <script>
-        let wins = 0, losses = 0, mvpWins = 0, points = 0.0;
-        let preMMR = 0, totalMMR = 2000;
-        const resetMMR = 2000;
-        const maxRedux = 2450;
-    
-        function updateStats(type) {
-            let preMMRChange = 0;
-            if (type === 'win') {
-                wins++;
-                preMMRChange = Math.floor(Math.random() * 3) + 10; // 10-12
-            } else if (type === 'loss') {
-                losses++;
-                preMMRChange = -(Math.floor(Math.random() * 3) + 9); // -9 to -11
-            } else if (type === 'mvp') {
-                mvpWins++;
-                preMMRChange = Math.floor(Math.random() * 2) + 13; // 13-14
-            } else if (type === 'point') {
-                points += 0.1;
-                preMMRChange = 0.1;
-            }
-            
-            preMMR += preMMRChange;
-            let reduction = calculateReduction(totalMMR);
-            let reducedMMR = preMMR * (1 - reduction);
-            totalMMR += reducedMMR;
-            preMMR = 0;
-            
-            document.getElementById('wins').innerText = wins;
-            document.getElementById('losses').innerText = losses;
-            document.getElementById('mvp').innerText = mvpWins;
-            document.getElementById('points').innerText = points.toFixed(1);
-            document.getElementById('preMMR').innerText = preMMR.toFixed(2);
-            document.getElementById('totalMMR').innerText = totalMMR.toFixed(2);
-        }
-    
-        function calculateReduction(mmr) {
-            if (mmr <= resetMMR) return 0;
-            if (mmr >= maxRedux) return 0.5;
-            return (mmr - resetMMR) / (maxRedux - resetMMR) * 0.5;
-        }
-    </script>
+   
     
     <script>
         function switchTab(tabName) {
