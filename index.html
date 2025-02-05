@@ -326,7 +326,58 @@
     </div>
     </div>
     
-   
+    <div class="stats-container">
+        <h2>Player Stats</h2>
+        <p><strong>Wins:</strong> <span id="wins">0</span> <button onclick="updateStats('win')">+1 Win</button></p>
+        <p><strong>Losses:</strong> <span id="losses">0</span> <button onclick="updateStats('loss')">+1 Loss</button></p>
+        <p><strong>MVP Wins:</strong> <span id="mvp">0</span> <button onclick="updateStats('mvp')">+1 MVP Win</button></p>
+        <p><strong>Points:</strong> <span id="points">0.0</span> <button onclick="updateStats('point')">+0.1 Point</button></p>
+        <p><strong>PreMMR:</strong> <span id="preMMR">0</span></p>
+        <p><strong>TotalMMR:</strong> <span id="totalMMR">2000</span></p>
+    </div>
+    
+    <script>
+        let wins = 0, losses = 0, mvpWins = 0, points = 0.0;
+        let preMMR = 0, totalMMR = 2000;
+        const resetMMR = 2000;
+        const maxRedux = 2450;
+    
+        function updateStats(type) {
+            let preMMRChange = 0;
+            if (type === 'win') {
+                wins++;
+                preMMRChange = Math.floor(Math.random() * 3) + 10; // 10-12
+            } else if (type === 'loss') {
+                losses++;
+                preMMRChange = -(Math.floor(Math.random() * 3) + 9); // -9 to -11
+            } else if (type === 'mvp') {
+                mvpWins++;
+                preMMRChange = Math.floor(Math.random() * 2) + 13; // 13-14
+            } else if (type === 'point') {
+                points += 0.1;
+                preMMRChange = 0.1;
+            }
+            
+            preMMR += preMMRChange;
+            let reduction = calculateReduction(totalMMR);
+            let reducedMMR = preMMR * (1 - reduction);
+            totalMMR += reducedMMR;
+            preMMR = 0;
+            
+            document.getElementById('wins').innerText = wins;
+            document.getElementById('losses').innerText = losses;
+            document.getElementById('mvp').innerText = mvpWins;
+            document.getElementById('points').innerText = points.toFixed(1);
+            document.getElementById('preMMR').innerText = preMMR.toFixed(2);
+            document.getElementById('totalMMR').innerText = totalMMR.toFixed(2);
+        }
+    
+        function calculateReduction(mmr) {
+            if (mmr <= resetMMR) return 0;
+            if (mmr >= maxRedux) return 0.5;
+            return (mmr - resetMMR) / (maxRedux - resetMMR) * 0.5;
+        }
+    </script>
     
     <script>
         function switchTab(tabName) {
