@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teams and Players</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212;
+            color: white;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #333;
+            color: white;
+            margin: 0 5px;
+            border-radius: 5px;
+        }
+        .tab.active {
+            background-color: #555;
+        }
+        .content {
+            display: none;
+        }
+        .content.active {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            max-height: 800px;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .box {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="switchTab('teams')">Teams</div>
+            <div class="tab" onclick="switchTab('players')">Players</div>
+        </div>
+        
+        <div id="teams" class="content active">
+            <!-- Team boxes -->
+            <div class="box">
+                <strong>Team Virtuoso - Managed by MT2C</strong>
+                <hr>
+                <ul>
+                    <li>Camico 🇩🇰</li>
+                    <li>Estibar 🇩🇪</li>
+                    <li>Novel 🇩🇪</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Teamo 3</strong>
+                <hr>
+                <ul>
+                    <li>Kobold. 🇺🇸</li>
+                    <li>Altitude 🇺🇸</li>
+                    <li>Flint 🇺🇸</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Gravity Esports</strong>
+                <hr>
+                <ul>
+                    <li>Pauso 🇪🇸</li>
+                    <li>Maze 🇲🇽</li>
+                    <li>Fortes. 🇪🇸</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Mentalis - Managed by Ham</strong>
+                <hr>
+                <ul>
+                    <li>Visions 🇺🇸</li>
+                    <li>KovaK 🇺🇸</li>
+                    <li>Xantik 🇳🇱</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Team Frantic - Managed by Mijfeksung</strong>
+                <hr>
+                <ul>
+                    <li>Comical 🇺🇸</li>
+                    <li>Timeless 🇬🇧</li>
+                    <li>Mezia 🇺🇸</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Team NV - Managed by Suhaan</strong>
+                <hr>
+                <ul>
+                    <li>Gamma 🇩🇪</li>
+                    <li>Essence 🇫🇷</li>
+                    <li>Haelicam 🇩🇪</li>
+                    <li>[SUB] Rosas 🇫🇷</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Fuzion</strong>
+                <hr>
+                <ul>
+                    <li>Arch 🇦🇺</li>
+                    <li>Chaos 🇦🇷</li>
+                    <li>Lucky 🇲🇽</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Loopify</strong>
+                <hr>
+                <ul>
+                    <li>Synergy 🇺🇸</li>
+                    <li>Mute 🇺🇸</li>
+                    <li>Whis 🇺🇸</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Effortless Esports</strong>
+                <hr>
+                <ul>
+                    <li>Winn3r 🇲🇽</li>
+                    <li>Perfecto 🇪🇸</li>
+                    <li>Calamity. 🇲🇽</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Team Arise - Managed by Quain</strong>
+                <hr>
+                <ul>
+                    <li>Kei 🇯🇵</li>
+                    <li>Tisuno 🇯🇵</li>
+                    <li>Faiz 🇸🇦</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Shiftup - Managed by Kana</strong>
+                <hr>
+                <ul>
+                    <li>Treysa 🇺🇸</li>
+                    <li>Fusar 🇨🇦</li>
+                    <li>Cluster 🇨🇦</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Reshot Precision</strong>
+                <hr>
+                <ul>
+                    <li>Decieve 🇩🇪</li>
+                    <li>Hope 🇳🇱</li>
+                    <li>Lan 🇳🇱</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Instunt</strong>
+                <hr>
+                <ul>
+                    <li>2Quik 🇿🇦</li>
+                    <li>Relentless 🇪🇪</li>
+                    <li>Eiro 🇪🇪</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Empress esports</strong>
+                <hr>
+                <ul>
+                    <li>Testa 🇨🇦</li>
+                    <li>Quadrant 🇺🇸</li>
+                    <li>Phoon 🇺🇸</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Team Tsunami - Managed by Jazzmir</strong>
+                <hr>
+                <ul>
+                    <li>Weavo 🇦🇺</li>
+                    <li>Ocean 🇦🇺</li>
+                    <li>Teski 🇦🇺</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>FOV Esports</strong>
+                <hr>
+                <ul>
+                    <li>Intax 🇺🇸</li>
+                    <li>Marq 🇺🇸</li>
+                    <li>Sam 🇺🇸</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Team HRK</strong>
+                <hr>
+                <ul>
+                    <li>Ghaza 🇸🇦</li>
+                    <li>Naso 🇸🇦</li>
+                    <li>Nrq07 🇸🇦</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Triplex Clan</strong>
+                <hr>
+                <ul>
+                    <li>Halcyon 🇩🇪</li>
+                    <li>Nexus 🇩🇪</li>
+                    <li>Nitro 🇩🇪</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Rios United</strong>
+                <hr>
+                <ul>
+                    <li>Fortunato 🇧🇷</li>
+                    <li>Retrasado^^ 🇧🇷</li>
+                    <li>Termino. 🇧🇷</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Lethal 57</strong>
+                <hr>
+                <ul>
+                    <li>Moon. 🇮🇩</li>
+                    <li>M7md 🇸🇦</li>
+                    <li>Fais2l 🇸🇦</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Endless Vanity - Managed by Deadassh</strong>
+                <hr>
+                <ul>
+                    <li>speed 🇲🇦</li>
+                    <li>swift 🇩🇪</li>
+                    <li>tsar 🇷🇺</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Endure Esports</strong>
+                <hr>
+                <ul>
+                    <li>Torture. 🇬🇧</li>
+                    <li>Carbide. 🇬🇧</li>
+                    <li>Typhoon. 🇳🇱</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>7Layers</strong>
+                <hr>
+                <ul>
+                    <li>Fortress 🇩🇪</li>
+                    <li>Insurrectionist 🇦🇷</li>
+                    <li>Earthmover 🇩🇪</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Razer</strong>
+                <hr>
+                <ul>
+                    <li>Naf 🇸🇦</li>
+                    <li>Manual 🇪🇸</li>
+                    <li>Mejor! 🇪🇸</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>EVO - Managed by Rosekey</strong>
+                <hr>
+                <ul>
+                    <li>complex 🇭🇷</li>
+                    <li>nivO 🇭🇷</li>
+                    <li>Tky 🇭🇷</li>
+                </ul>
+            </div>
+            <div class="box">
+                <strong>Bomboclat Esports - Managed by Vryx</strong>
+                <hr>
+                <ul>
+                    <li>Rogue 🇬🇧</li>
+                    <li>Kareem 🇦🇷</li>
+                    <li>A7md 🇸🇦</li>
+                </ul>
+            </div>
+        </div>
+        <div id="players" class="content">
+            <!-- Player boxes -->
+            <div class="box">
+                <strong>Camico</strong>
+                <hr>
+                <p>Country: 🇩🇰</p>
+                <p>Team: Team Virtuoso</p>
+                <p>ELO: 2000</p>
+            </div>
+            <div class="box">
+                <strong>Estibar</strong>
+                <hr>
+                <p>Country: 🇩🇪</p>
+                <p>Team: Team Virtuoso</p>
+                <p>ELO: 2000</p>
+            </div>
+            <div class="box">
+                <strong>Novel</strong>
+                <hr>
+                <p>Country: 🇩🇪</p>
+                <p>Team: Team Virtuoso</p>
+                <p>ELO: 2000</p>
+            </div>
+            <!-- Add remaining players here -->
+        </div>
+    </div>
+    </div>
+    
+    <div class="stats-container">
+        <h2>Player Stats</h2>
+        <p><strong>Wins:</strong> <span id="wins">0</span> <button onclick="updateStats('win')">+1 Win</button></p>
+        <p><strong>Losses:</strong> <span id="losses">0</span> <button onclick="updateStats('loss')">+1 Loss</button></p>
+        <p><strong>MVP Wins:</strong> <span id="mvp">0</span> <button onclick="updateStats('mvp')">+1 MVP Win</button></p>
+        <p><strong>Points:</strong> <span id="points">0.0</span> <button onclick="updateStats('point')">+0.1 Point</button></p>
+        <p><strong>PreMMR:</strong> <span id="preMMR">0</span></p>
+        <p><strong>TotalMMR:</strong> <span id="totalMMR">2000</span></p>
+    </div>
+    
+    <script>
+        let wins = 0, losses = 0, mvpWins = 0, points = 0.0;
+        let preMMR = 0, totalMMR = 2000;
+        const resetMMR = 2000;
+        const maxRedux = 2450;
+    
+        function updateStats(type) {
+            let preMMRChange = 0;
+            if (type === 'win') {
+                wins++;
+                preMMRChange = Math.floor(Math.random() * 3) + 10; // 10-12
+            } else if (type === 'loss') {
+                losses++;
+                preMMRChange = -(Math.floor(Math.random() * 3) + 9); // -9 to -11
+            } else if (type === 'mvp') {
+                mvpWins++;
+                preMMRChange = Math.floor(Math.random() * 2) + 13; // 13-14
+            } else if (type === 'point') {
+                points += 0.1;
+                preMMRChange = 0.1;
+            }
+            
+            preMMR += preMMRChange;
+            let reduction = calculateReduction(totalMMR);
+            let reducedMMR = preMMR * (1 - reduction);
+            totalMMR += reducedMMR;
+            preMMR = 0;
+            
+            document.getElementById('wins').innerText = wins;
+            document.getElementById('losses').innerText = losses;
+            document.getElementById('mvp').innerText = mvpWins;
+            document.getElementById('points').innerText = points.toFixed(1);
+            document.getElementById('preMMR').innerText = preMMR.toFixed(2);
+            document.getElementById('totalMMR').innerText = totalMMR.toFixed(2);
+        }
+    
+        function calculateReduction(mmr) {
+            if (mmr <= resetMMR) return 0;
+            if (mmr >= maxRedux) return 0.5;
+            return (mmr - resetMMR) / (maxRedux - resetMMR) * 0.5;
+        }
+    </script>
+    
+    <script>
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(tabName).classList.add('active');
+        }
+    </script>
+</body>
+</html>
