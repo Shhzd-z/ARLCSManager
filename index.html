@@ -3,14 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teams and Players</title>
+    <title>ARLCS</title>
     <style>
+        @font-face {
+            font-family: 'usuzi';
+            src: url('usuzi.ttf');
+        }
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Twemoji Country Flags';
             margin: 0;
             padding: 0;
             background-color: #121212;
             color: white;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between; /* Pushes items to left & right */
+            align-items: center; /* Aligns items vertically */
+            padding: 20px;
+            background-color: #121212;
+        }
+        .timer-container {
+            display: flex;
+            align-items: center; /* Keep text and timer aligned horizontally */
+        }
+        .timer-text {
+            font-size: 45px;
+            font-family: 'usuzi';
+            font-weight: bold;
+            color: white;
+            margin-right: 10px; /* Space between text and timer */
+        }
+        .timer {
+            font-size: 45px;
+            font-family: 'usuzi';
+            font-weight: bold;
+            color: #ff9800; /* Orange color for visibility */
+        }
+        .title {
+            font-size: 75px;
+            font-family: 'usuzi';
+            font-weight: bold;
+            margin: 15px 0;
+            text-align: left;
+        }
+        .titleheader {
+            font-size: 55px;
+            font-family: 'usuzi';
+            font-weight: bold;
+            margin: 15px 0;
+            text-align: Right;
         }
         .container {
             width: 80%;
@@ -38,28 +80,67 @@
         }
         .content.active {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 15px;
-            max-height: 800px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 5fr));
+            gap: 35px;
+            max-height: 700px;
+            overflow-y: auto;
+            padding: 15px;
+            scrollbar-width: thin;
+            scrollbar-color: #ff7b00 #333;
+        }
+        .leaderboardcont {
+            display: none;
+        }
+        .leaderboardcont.active {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 35px;
+            max-height: 700px;
             overflow-y: auto;
             padding: 10px;
+            scrollbar-width: thin;
+            scrollbar-color: #ff7b00 #333;
+            font-size: 25px;
         }
         .box {
             background: #1e1e1e;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(255, 102, 0, 0.63);
+            text-align: left;
+            font-size: 20px;
+        }
+        .leaderboardbox {
+            background: #1e1e1e;
             padding: 15px;
             border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.1);
+            box-shadow: 0px 0px 10px rgba(255, 102, 0, 0.63);
             text-align: left;
+            width: 50%;
+            min-width: 300px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <div class="header">
+            <h1 class="title">ARLCS</h1>
+            <div class="timer-container">
+                <span class="timer-text">SEASON RESET: </span>
+                <div id="timer" class="timer">Loading...</div>
+            </div>
+        </div>
+        <div id="countdown">
+
+        </div>
         <div class="tabs">
             <div class="tab active" onclick="switchTab('teams')">Teams</div>
             <div class="tab" onclick="switchTab('players')">Players</div>
+            <div class="tab" onclick="switchTab('leaderboard')">Leaderboard</div>
         </div>
-        
+
         <div id="teams" class="content active">
             <!-- Team boxes -->
             <div class="box">
@@ -68,6 +149,7 @@
                 <ul>
                     <li>Camico 🇩🇰</li>
                     <li>Estibar 🇩🇪</li>
+                    <li>Barricade 🇮🇱</li>
                     <li>Novel 🇩🇪</li>
                 </ul>
             </div>
@@ -113,8 +195,8 @@
                 <ul>
                     <li>Gamma 🇩🇪</li>
                     <li>Essence 🇫🇷</li>
-                    <li>Haelicam 🇩🇪</li>
-                    <li>[SUB] Rosas 🇫🇷</li>
+                    <li>Kaiser 🇩🇪</li>
+                    <li>Kareem 🇦🇷 </li>
                 </ul>
             </div>
             <div class="box">
@@ -230,7 +312,7 @@
                 <hr>
                 <ul>
                     <li>Fortunato 🇧🇷</li>
-                    <li>Retrasado^^ 🇧🇷</li>
+                    <li>Retro^^ 🇧🇷</li>
                     <li>Termino. 🇧🇷</li>
                 </ul>
             </div>
@@ -293,47 +375,640 @@
                 <hr>
                 <ul>
                     <li>Rogue 🇬🇧</li>
-                    <li>Kareem 🇦🇷</li>
-                    <li>A7md 🇸🇦</li>
+                    <li>Char 🇳🇱 </li>
+                    <li>Fressco 🇫🇷</li>
                 </ul>
             </div>
         </div>
         <div id="players" class="content">
             <!-- Player boxes -->
             <div class="box">
-                <strong>Camico</strong>
+                <strong id="Camico"></strong>
                 <hr>
-                <p>Country: 🇩🇰</p>
                 <p>Team: Team Virtuoso</p>
-                <p>ELO: 2000</p>
             </div>
             <div class="box">
-                <strong>Estibar</strong>
+                <strong id="Estibar"></strong>
                 <hr>
-                <p>Country: 🇩🇪</p>
                 <p>Team: Team Virtuoso</p>
-                <p>ELO: 2000</p>
             </div>
             <div class="box">
-                <strong>Novel</strong>
+                <strong id="Novel"></strong>
                 <hr>
-                <p>Country: 🇩🇪</p>
                 <p>Team: Team Virtuoso</p>
-                <p>ELO: 2000</p>
             </div>
-            <!-- Add remaining players here -->
+            <div class="box">
+                <strong id="Barricade"></strong>
+                <hr>
+                <p>Team: Team Virtuoso</p>
+            </div>
+            <div class="box">
+                <strong id="Kobold"></strong>
+                <hr>
+                <p>Team: Teamo 3</p>
+            </div>
+            <div class="box">
+                <strong id="Altitude"></strong>
+                <hr>
+                <p>Team: Teamo 3</p>
+            </div>
+            <div class="box">
+                <strong id="Flint"></strong>
+                <hr>
+                <p>Team: Teamo 3</p>
+            </div>
+            <div class="box">
+                <strong id="Pauso"></strong>
+                <hr>
+                <p>Team: Gravity Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Maze"></strong>
+                <hr>
+                <p>Team: Gravity Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Fortes."></strong>
+                <hr>
+                <p>Team: Gravity Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Visions"></strong>
+                <hr>
+                <p>Team: Mentalis</p>
+            </div>
+            <div class="box">
+                <strong id="KovaK"></strong>
+                <hr>
+                <p>Team: Mentalis</p>
+            </div>
+            <div class="box">
+                <strong id="Xantik"></strong>
+                <hr>
+                <p>Team: Mentalis</p>
+            </div>
+            <div class="box">
+                <strong id="Comical"></strong>
+                <hr>
+                <p>Team: Team Frantic</p>
+            </div>
+            <div class="box">
+                <strong id="Timeless"></strong>
+                <hr>
+                <p>Team: Team Frantic</p>
+            </div>
+            <div class="box">
+                <strong id="Mezia"></strong>
+                <hr>
+                <p>Team: Team Frantic</p>
+            </div>
+            <div class="box">
+                <strong id="Gamma"></strong>
+                <hr>
+                <p>Team: Team NV</p>
+            </div>
+            <div class="box">
+                <strong id="Essence"></strong>
+                <hr>
+                <p>Team: Team NV</p>
+            </div>
+            <div class="box">
+                <strong id="Kaiser"></strong>
+                <hr>
+                <p>Team: Team NV</p>
+            </div>
+            <div class="box">
+                <strong id="Kareem"></strong>
+                <hr>
+                <p>Team: Team NV</p>
+            </div>
+            <div class="box">
+                <strong id="Arch"></strong>
+                <hr>
+                <p>Team: Fuzion</p>
+            </div>
+            <div class="box">
+                <strong id="Chaos"></strong>
+                <hr>
+                <p>Team: Fuzion</p>
+            </div>
+            <div class="box">
+                <strong id="Lucky"></strong>
+                <hr>
+                <p>Team: Fuzion</p>
+            </div>
+            <div class="box">
+                <strong id="Synergy"></strong>
+                <hr>
+                <p>Team: Loopify!</p>
+            </div>
+            <div class="box">
+                <strong id="Mute"></strong>
+                <hr>
+                <p>Team: Loopify!</p>
+            </div>
+            <div class="box">
+                <strong id="Whis"></strong>
+                <hr>
+                <p>Team: Loopify!</p>
+            </div>
+            <div class="box">
+                <strong id="Winn3r"></strong>
+                <hr>
+                <p>Team: Effortless Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Perfecto"></strong>
+                <hr>
+                <p>Team: Effortless Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Calamity."></strong>
+                <hr>
+                <p>Team: Effortless Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Kei"></strong>
+                <hr>
+                <p>Team: Team Arise</p>
+            </div>
+            <div class="box">
+                <strong id="Tisuno"></strong>
+                <hr>
+                <p>Team: Team Arise</p>
+            </div>
+            <div class="box">
+                <strong id="Faiz"></strong>
+                <hr>
+                <p>Team: Team Arise</p>
+            </div>
+            <div class="box">
+                <strong id="Treysa"></strong>
+                <hr>
+                <p>Team: ShiftUp</p>
+            </div>
+            <div class="box">
+                <strong id="Fusar"></strong>
+                <hr>
+                <p>Team: ShiftUp</p>
+            </div>
+            <div class="box">
+                <strong id="Cluster"></strong>
+                <hr>
+                <p>Team: ShiftUp</p>
+            </div>
+            <div class="box">
+                <strong id="Decieve"></strong>
+                <hr>
+                <p>Team: Reshot Precision</p>
+            </div>
+            <div class="box">
+                <strong id="Hope"></strong>
+                <hr>
+                <p>Team: Reshot Precision</p>
+            </div>
+            <div class="box">
+                <strong id="Lan"></strong>
+                <hr>
+                <p>Team: Reshot Precision</p>
+            </div>
+            <div class="box">
+                <strong id="2Quik"></strong>
+                <hr>
+                <p>Team: Instunt</p>
+            </div>
+            <div class="box">
+                <strong id="Relentless"></strong>
+                <hr>
+                <p>Team: Instunt</p>
+            </div>
+            <div class="box">
+                <strong id="Eiro"></strong>
+                <hr>
+                <p>Team: Instunt</p>
+            </div>
+            <div class="box">
+                <strong id="Testa"></strong>
+                <hr>
+                <p>Team: Empress Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Quadrant"></strong>
+                <hr>
+                <p>Team: Empress Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Phoon"></strong>
+                <hr>
+                <p>Team: Empress Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Weavo"></strong>
+                <hr>
+                <p>Team: Team Tsunami</p>
+            </div>
+            <div class="box">
+                <strong id="Ocean"></strong>
+                <hr>
+                <p>Team: Team Tsunami</p>
+            </div>
+            <div class="box">
+                <strong id="Teski"></strong>
+                <hr>
+                <p>Team: Team Tsunami</p>
+            </div>
+            <div class="box">
+                <strong id="Intax"></strong>
+                <hr>
+                <p>Team: FOV Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Marq"></strong>
+                <hr>
+                <p>Team: FOV Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Sam"></strong>
+                <hr>
+                <p>Team: FOV Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Ghaza"></strong>
+                <hr>
+                <p>Team: Team HRK</p>
+            </div>
+            <div class="box">
+                <strong id="Naso"></strong>
+                <hr>
+                <p>Team: Team HRK</p>
+            </div>
+            <div class="box">
+                <strong id="Nrq07"></strong>
+                <hr>
+                <p>Team: Team HRK</p>
+            </div>
+            <div class="box">
+                <strong id="Halcyon"></strong>
+                <hr>
+                <p>Team: Triplex Clan</p>
+            </div>
+            <div class="box">
+                <strong id="Nexus"></strong>
+                <hr>
+                <p>Team: Triplex Clan</p>
+            </div>
+            <div class="box">
+                <strong id="Nitro"></strong>
+                <hr>
+                <p>Team: Triplex Clan</p>
+            </div>
+            <div class="box">
+                <strong id="Fortunato"></strong>
+                <hr>
+                <p>Team: Rios UNITED</p>
+            </div>
+            <div class="box">
+                <strong id="Retro^^"></strong>
+                <hr>
+                <p>Team: Rios UNITED</p>
+            </div>
+            <div class="box">
+                <strong id="Termino."></strong>
+                <hr>
+                <p>Team: Rios UNITED</p>
+            </div>
+            <div class="box">
+                <strong id="Moon."></strong>
+                <hr>
+                <p>Team: Lethal 57</p>
+            </div>
+            <div class="box">
+                <strong id="M7md"></strong>
+                <hr>
+                <p>Team: Lethal 57</p>
+            </div>
+            <div class="box">
+                <strong id="Fais2l"></strong>
+                <hr>
+                <p>Team: Lethal 57</p>
+            </div>
+            <div class="box">
+                <strong id="speed"></strong>
+                <hr>
+                <p>Team: Endless Vanity</p>
+            </div>
+            <div class="box">
+                <strong id="swift"></strong>
+                <hr>
+                <p>Team: Endless Vanity</p>
+            </div>
+            <div class="box">
+                <strong id="tsar"></strong>
+                <hr>
+                <p>Team: Endless Vanity</p>
+            </div>
+            <div class="box">
+                <strong id="Torture."></strong>
+                <hr>
+                <p>Team: Endure Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Carbide."></strong>
+                <hr>
+                <p>Team: Endure Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Typhoon."></strong>
+                <hr>
+                <p>Team: Endure Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Fortress"></strong>
+                <hr>
+                <p>Team: 7Layers</p>
+            </div>
+            <div class="box">
+                <strong id="Insurrectionist"></strong>
+                <hr>
+                <p>Team: 7Layers</p>
+            </div>
+            <div class="box">
+                <strong id="Earthmover"></strong>
+                <hr>
+                <p>Team: 7Layers</p>
+            </div>
+            <div class="box">
+                <strong id="Naf"></strong>
+                <hr>
+                <p>Team: Razer</p>
+            </div>
+            <div class="box">
+                <strong id="Manual"></strong>
+                <hr>
+                <p>Team: Razer</p>
+            </div>
+            <div class="box">
+                <strong id="Mejor!"></strong>
+                <hr>
+                <p>Team: Razer</p>
+            </div>
+            <div class="box">
+                <strong id="complex"></strong>
+                <hr>
+                <p>Team: EVO</p>
+            </div>
+            <div class="box">
+                <strong id="nivO"></strong>
+                <hr>
+                <p>Team: EVO</p>
+            </div>
+            <div class="box">
+                <strong id="Tky"></strong>
+                <hr>
+                <p>Team: EVO</p>
+            </div>
+            <div class="box">
+                <strong id="Rogue"></strong>
+                <hr>
+                <p>Team: Bomboclat Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Char"></strong>
+                <hr>
+                <p>Team: Bomboclat Esports</p>
+            </div>
+            <div class="box">
+                <strong id="Fressco"></strong>
+                <hr>
+                <p>Team: Bomboclat Esports</p>
+            </div>
         </div>
+        <div id="leaderboard" class="leaderboardcont">
+            <!-- Leaderboard will be generated here. -->
+       </div>
     </div>
     </div>
     
     <script>
+        const players = [
+            { name: "Camico", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Estibar", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Novel", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Barricade", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Kobold.", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Altitude", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Flint", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Pauso", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Maze", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Fortes.", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Visions", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "KovaK", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Xantik", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Comical", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Timeless", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Mezia", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Gamma", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Essence", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Kaiser", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Kareem", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Arch", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Chaos", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Lucky", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Synergy", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Mute", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Whis", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Winn3r", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Perfecto", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Calamity.", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Kei", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Tisuno", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Faiz", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Treysa", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Fusar", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Cluster", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Decieve", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Hope", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Lan", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "2Quik", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Relentless", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Eiro", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Testa", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Quadrant", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Phoon", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Weavo", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Ocean", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Teski", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Intax", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Marq", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Sam", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Ghaza", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Naso", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Nrq07", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Halcyon", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Nexus", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Nitro", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Fortunato", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Retro^^", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Termino.", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Moon.", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "M7md", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Fais2l", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "speed", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "swift", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "tsar", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Torture.", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Carbide.", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Typhoon.", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Fortress", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Insurrectionist", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Earthmover", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Naf", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Manual", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Mejor!", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "complex", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "nivO", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Tky", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Rogue", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Char", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Fressco", wins: 0, losses: 0, mvpwins: 0, }
+        ];
+    const resetMMR = 2000;
+    const maxRedux = 2450;
+    players.forEach(player => {
+        let totalMMR = resetMMR
+        let preMMR = 0;
+        for (let i = 0; i < player.wins; i++) {
+                const winElo = (Math.random() < 0.5) ? 2 : 4;
+                preMMR += winElo;
+            }
+        for (let i = 0; i < player.losses; i++) {
+                const loseElo = (Math.random() < 0.5) ? 2 : 3;
+                preMMR -= loseElo;
+        }
+        for (let i = 0; i < player.mvpwins; i++) {
+                const mvpElo = (Math.random() < 0.5) ? 4 : 6;
+                preMMR += mvpElo;
+        }
+        totalMMR += preMMR;
+        preMMR = 0;
+
+        player.MMR = totalMMR
+        console.log(`${player.name} has an Elo of: ${player.MMR}`);
+
+    });
+        document.getElementById("Camico").innerHTML = `Camico - MMR: ${players[0].MMR}`;
+        document.getElementById("Estibar").innerHTML = `Estibar - MMR: ${players[1].MMR}`;
+        document.getElementById("Novel").innerHTML = `Novel - MMR: ${players[2].MMR}`;
+        document.getElementById("Barricade").innerHTML = `Barricade - MMR: ${players[3].MMR}`;
+        document.getElementById("Kobold").innerHTML = `Kobold - MMR: ${players[4].MMR}`;
+        document.getElementById("Altitude").innerHTML = `Altitude - MMR: ${players[5].MMR}`;
+        document.getElementById("Flint").innerHTML = `Flint - MMR: ${players[6].MMR}`;
+        document.getElementById("Pauso").innerHTML = `Pauso - MMR: ${players[7].MMR}`;
+        document.getElementById("Maze").innerHTML = `Maze - MMR: ${players[8].MMR}`;
+        document.getElementById("Fortes.").innerHTML = `Fortes. - MMR: ${players[9].MMR}`;
+        document.getElementById("Visions").innerHTML = `Visions - MMR: ${players[10].MMR}`;
+        document.getElementById("KovaK").innerHTML = `KovaK - MMR: ${players[11].MMR}`;
+        document.getElementById("Xantik").innerHTML = `Xantik - MMR: ${players[12].MMR}`;
+        document.getElementById("Comical").innerHTML = `Comical - MMR: ${players[13].MMR}`;
+        document.getElementById("Timeless").innerHTML = `Timeless - MMR: ${players[14].MMR}`;
+        document.getElementById("Mezia").innerHTML = `Mezia - MMR: ${players[15].MMR}`;
+        document.getElementById("Gamma").innerHTML = `Gamma - MMR: ${players[16].MMR}`;
+        document.getElementById("Essence").innerHTML = `Essence - MMR: ${players[17].MMR}`;
+        document.getElementById("Kaiser").innerHTML = `Kaiser - MMR: ${players[18].MMR}`;
+        document.getElementById("Kareem").innerHTML = `Kareem - MMR: ${players[19].MMR}`;
+        document.getElementById("Arch").innerHTML = `Arch - MMR: ${players[20].MMR}`;
+        document.getElementById("Chaos").innerHTML = `Chaos - MMR: ${players[21].MMR}`;
+        document.getElementById("Lucky").innerHTML = `Lucky - MMR: ${players[22].MMR}`;
+        document.getElementById("Synergy").innerHTML = `Synergy - MMR: ${players[23].MMR}`;
+        document.getElementById("Mute").innerHTML = `Mute - MMR: ${players[24].MMR}`;
+        document.getElementById("Whis").innerHTML = `Whis - MMR: ${players[25].MMR}`;
+        document.getElementById("Winn3r").innerHTML = `Winn3r - MMR: ${players[26].MMR}`;
+        document.getElementById("Perfecto").innerHTML = `Perfecto - MMR: ${players[27].MMR}`;
+        document.getElementById("Calamity.").innerHTML = `Calamity. - MMR: ${players[28].MMR}`;
+        document.getElementById("Kei").innerHTML = `Kei - MMR: ${players[29].MMR}`;
+        document.getElementById("Tisuno").innerHTML = `Tisuno - MMR: ${players[30].MMR}`;
+        document.getElementById("Faiz").innerHTML = `Faiz - MMR: ${players[31].MMR}`;
+        document.getElementById("Treysa").innerHTML = `Treysa - MMR: ${players[32].MMR}`;
+        document.getElementById("Fusar").innerHTML = `Fusar - MMR: ${players[33].MMR}`;
+        document.getElementById("Cluster").innerHTML = `Cluster - MMR: ${players[34].MMR}`;
+        document.getElementById("Decieve").innerHTML = `Decieve - MMR: ${players[35].MMR}`;
+        document.getElementById("Hope").innerHTML = `Hope - MMR: ${players[36].MMR}`;
+        document.getElementById("Lan").innerHTML = `Lan - MMR: ${players[37].MMR}`;
+        document.getElementById("2Quik").innerHTML = `2Quik - MMR: ${players[38].MMR}`;
+        document.getElementById("Relentless").innerHTML = `Relentless - MMR: ${players[39].MMR}`;
+        document.getElementById("Eiro").innerHTML = `Eiro - MMR: ${players[40].MMR}`;
+        document.getElementById("Testa").innerHTML = `Testa - MMR: ${players[41].MMR}`;
+        document.getElementById("Quadrant").innerHTML = `Quadrant - MMR: ${players[42].MMR}`;
+        document.getElementById("Phoon").innerHTML = `Phoon - MMR: ${players[43].MMR}`;
+        document.getElementById("Weavo").innerHTML = `Weavo - MMR: ${players[44].MMR}`;
+        document.getElementById("Ocean").innerHTML = `Ocean - MMR: ${players[45].MMR}`;
+        document.getElementById("Teski").innerHTML = `Teski - MMR: ${players[46].MMR}`;
+        document.getElementById("Intax").innerHTML = `Intax - MMR: ${players[47].MMR}`;
+        document.getElementById("Marq").innerHTML = `Marq - MMR: ${players[48].MMR}`;
+        document.getElementById("Sam").innerHTML = `Sam - MMR: ${players[49].MMR}`;
+        document.getElementById("Ghaza").innerHTML = `Ghaza - MMR: ${players[50].MMR}`;
+        document.getElementById("Naso").innerHTML = `Naso - MMR: ${players[51].MMR}`;
+        document.getElementById("Nrq07").innerHTML = `Nrq07 - MMR: ${players[52].MMR}`;
+        document.getElementById("Halcyon").innerHTML = `Halcyon - MMR: ${players[53].MMR}`;
+        document.getElementById("Nexus").innerHTML = `Nexus - MMR: ${players[54].MMR}`;
+        document.getElementById("Nitro").innerHTML = `Nitro - MMR: ${players[55].MMR}`;
+        document.getElementById("Fortunato").innerHTML = `Fortunato - MMR: ${players[56].MMR}`;
+        document.getElementById("Retro^^").innerHTML = `Retro^^ - MMR: ${players[57].MMR}`;
+        document.getElementById("Termino.").innerHTML = `Termino. - MMR: ${players[58].MMR}`;
+        document.getElementById("Moon.").innerHTML = `Moon. - MMR: ${players[59].MMR}`;
+        document.getElementById("M7md").innerHTML = `M7md - MMR: ${players[60].MMR}`;
+        document.getElementById("Fais2l").innerHTML = `Fais2l - MMR: ${players[61].MMR}`;
+        document.getElementById("speed").innerHTML = `speed - MMR: ${players[62].MMR}`;
+        document.getElementById("swift").innerHTML = `swift - MMR: ${players[63].MMR}`;
+        document.getElementById("tsar").innerHTML = `tsar - MMR: ${players[64].MMR}`;
+        document.getElementById("Torture.").innerHTML = `Torture. - MMR: ${players[65].MMR}`;
+        document.getElementById("Carbide.").innerHTML = `Carbide. - MMR: ${players[66].MMR}`;
+        document.getElementById("Typhoon.").innerHTML = `Typhoon. - MMR: ${players[67].MMR}`;
+        document.getElementById("Fortress").innerHTML = `Fortress - MMR: ${players[68].MMR}`;
+        document.getElementById("Insurrectionist").innerHTML = `Insurrectionist - MMR: ${players[69].MMR}`;
+        document.getElementById("Earthmover").innerHTML = `Earthmover - MMR: ${players[70].MMR}`;
+        document.getElementById("Naf").innerHTML = `Naf - MMR: ${players[71].MMR}`;
+        document.getElementById("Manual").innerHTML = `Manual - MMR: ${players[72].MMR}`;
+        document.getElementById("Mejor!").innerHTML = `Mejor! - MMR: ${players[73].MMR}`;
+        document.getElementById("complex").innerHTML = `complex - MMR: ${players[74].MMR}`;
+        document.getElementById("nivO").innerHTML = `nivO - MMR: ${players[75].MMR}`;
+        document.getElementById("Tky").innerHTML = `Tky - MMR: ${players[76].MMR}`;
+        document.getElementById("Rogue").innerHTML = `Rogue - MMR: ${players[77].MMR}`;
+        document.getElementById("Char").innerHTML = `Char - MMR: ${players[78].MMR}`;
+        document.getElementById("Fressco").innerHTML = `Fressco - MMR: ${players[79].MMR}`;
+
+        function generateLeaderboard() {
+            const leaderboard = document.getElementById("leaderboard");
+            leaderboard.innerHTML = ""; 
+            
+            const sortedPlayers = players.sort((a, b) => b.MMR - a.MMR).slice(0, 20);
+            
+            sortedPlayers.forEach((player, index) => {
+                const div = document.createElement("div");
+                div.classList.add("leaderboardbox");
+                div.innerHTML = `<strong>Rank ${index + 1}</strong> - ${player.name}`;
+                leaderboard.appendChild(div);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", generateLeaderboard);
+</script>
+<script src="script.js"></script>
+    <script>
         function switchTab(tabName) {
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.leaderboardcont').forEach(content => content.classList.remove('active'));
+            
             
             document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
             document.getElementById(tabName).classList.add('active');
         }
     </script>
+    <script type="module">
+        // Polyfill for flag emojis:
+        import { polyfillCountryFlagEmojis } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
+        polyfillCountryFlagEmojis();
+      </script>
 </body>
 </html>
