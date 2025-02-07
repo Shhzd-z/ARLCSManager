@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,6 +10,7 @@
             font-family: 'usuzi';
             src: url('usuzi.ttf');
         }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif, 'Twemoji Country Flags';
             margin: 0;
@@ -16,30 +18,40 @@
             background-color: #121212;
             color: white;
         }
+
         .header {
             display: flex;
-            justify-content: space-between; /* Pushes items to left & right */
-            align-items: center; /* Aligns items vertically */
+            justify-content: space-between;
+            /* Pushes items to left & right */
+            align-items: center;
+            /* Aligns items vertically */
             padding: 20px;
             background-color: #121212;
         }
+
         .timer-container {
             display: flex;
-            align-items: center; /* Keep text and timer aligned horizontally */
+            align-items: center;
+            /* Keep text and timer aligned horizontally */
         }
+
         .timer-text {
             font-size: 45px;
             font-family: 'usuzi';
             font-weight: bold;
             color: white;
-            margin-right: 10px; /* Space between text and timer */
+            margin-right: 10px;
+            /* Space between text and timer */
         }
+
         .timer {
             font-size: 45px;
             font-family: 'usuzi';
             font-weight: bold;
-            color: #ff9800; /* Orange color for visibility */
+            color: #ff9800;
+            /* Orange color for visibility */
         }
+
         .title {
             font-size: 75px;
             font-family: 'usuzi';
@@ -47,6 +59,7 @@
             margin: 15px 0;
             text-align: left;
         }
+
         .titleheader {
             font-size: 55px;
             font-family: 'usuzi';
@@ -54,16 +67,19 @@
             margin: 15px 0;
             text-align: Right;
         }
+
         .container {
             width: 80%;
             margin: auto;
             text-align: center;
         }
+
         .tabs {
             display: flex;
             justify-content: center;
             margin: 20px 0;
         }
+
         .tab {
             padding: 10px 20px;
             cursor: pointer;
@@ -72,12 +88,15 @@
             margin: 0 5px;
             border-radius: 5px;
         }
+
         .tab.active {
             background-color: #555;
         }
+
         .content {
             display: none;
         }
+
         .content.active {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 5fr));
@@ -88,9 +107,11 @@
             scrollbar-width: thin;
             scrollbar-color: #ff7b00 #333;
         }
+
         .leaderboardcont {
             display: none;
         }
+
         .leaderboardcont.active {
             display: flex;
             flex-direction: column;
@@ -103,6 +124,7 @@
             scrollbar-color: #ff7b00 #333;
             font-size: 25px;
         }
+
         .box {
             background: #1e1e1e;
             padding: 35px;
@@ -111,6 +133,7 @@
             text-align: left;
             font-size: 20px;
         }
+
         .leaderboardbox {
             background: #1e1e1e;
             padding: 15px;
@@ -123,6 +146,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
@@ -139,6 +163,7 @@
             <div class="tab active" onclick="switchTab('teams')">Teams</div>
             <div class="tab" onclick="switchTab('players')">Players</div>
             <div class="tab" onclick="switchTab('leaderboard')">Leaderboard</div>
+            <div class="tab" onclick="switchTab('matches')">Matches</div>
         </div>
 
         <div id="teams" class="content active">
@@ -802,11 +827,26 @@
         </div>
         <div id="leaderboard" class="leaderboardcont">
             <!-- Leaderboard will be generated here. -->
-       </div>
+        </div>
+        <div id="matches" class="content">
+
+        </div>
     </div>
     </div>
-    
+
     <script>
+
+        document.addEventListener("DOMContentLoaded", () => {
+            fetch('http://localhost:3000/matchHistory')
+                .then(response => response.json()) // Parse JSON
+                .then(data => {
+                    console.log("Parsed Data:", data);
+                    processMatchHistory(data); // Process matches
+                    console.log("Updated Player Stats:", players);
+                })
+                .catch(error => console.error('Error fetching match history:', error));
+        });
+
         const players = [
             { name: "Camico", wins: 0, losses: 0, mvpwins: 0, },
             { name: "Estibar", wins: 0, losses: 0, mvpwins: 0, },
@@ -879,43 +919,96 @@
             { name: "Fortress", wins: 0, losses: 0, mvpwins: 0, },
             { name: "Insurrectionist", wins: 0, losses: 0, mvpwins: 0, },
             { name: "Earthmover", wins: 0, losses: 0, mvpwins: 0, },
-            { name: "Naf", wins: 2, losses: 2, mvpwins: 0, },
-            { name: "Manual", wins: 0, losses: 2, mvpwins: 2, },
-            { name: "Mejor!", wins: 2, losses: 2, mvpwins: 0, },
+            { name: "Naf", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Manual", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Mejor!", wins: 0, losses: 0, mvpwins: 0, },
             { name: "complex", wins: 0, losses: 0, mvpwins: 0, },
             { name: "nivO", wins: 0, losses: 0, mvpwins: 0, },
             { name: "Tky", wins: 0, losses: 0, mvpwins: 0, },
-            { name: "Rogue", wins: 2, losses: 2, mvpwins: 0, },
-            { name: "Char", wins: 0, losses: 2, mvpwins: 2, },
-            { name: "Fressco", wins: 2, losses: 2, mvpwins: 0, },
-            { name: "_-matador", wins: 1, losses: 1, mvpwins: 0, },
-            { name: "disco^^", wins: 0, losses: 1, mvpwins: 0, },
-            { name: "fierro", wins: 1, losses: 0, mvpwins: 0, }
+            { name: "Rogue", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Char", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "Fressco", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "_-matador", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "disco^^", wins: 0, losses: 0, mvpwins: 0, },
+            { name: "fierro", wins: 0, losses: 0, mvpwins: 0, }
         ];
-    const resetMMR = 2000;
-    const maxRedux = 2450;
-    players.forEach(player => {
-        let totalMMR = resetMMR
-        let preMMR = 0;
-        for (let i = 0; i < player.wins; i++) {
-                const winElo = (Math.random() < 0.5) ? 6 : 7;
-                preMMR += winElo;
+
+        function findPlayer(playerName) {
+            return players.find(player => player.name === playerName);
+        }
+
+        function processMatchHistory(matches) {
+            matches.forEach(match => {
+                match.BlueTeam.forEach(playerName => {
+                    let player = findPlayer(playerName);
+                    if (player) {
+                        // Update stats
+                        if (match.WinningTeam === 1) player.wins++;
+                        else player.losses++;
+                    }
+                });
+
+                match.OrangeTeam.forEach(playerName => {
+                    let player = findPlayer(playerName);
+                    if (player) {
+                        // Update stats
+                        if (match.WinningTeam === 2) player.wins++;
+                        else player.losses++;
+                    }
+                });
+
+                // MVP Tracking
+                let mvpPlayer = findPlayer(match.MVP);
+                if (mvpPlayer) {
+                    mvpPlayer.mvpwins++;
+                }
+            });
+            const resetMMR = 2000;
+        const maxRedux = 2450;
+
+        let storedMMR = JSON.parse(localStorage.getItem('playerMMR')) || {};
+
+        players.forEach(player => {
+            const key = player.name;
+
+
+            if (!storedMMR[key] ||
+                storedMMR[key].wins !== player.wins ||
+                storedMMR[key].losses !== player.losses ||
+                storedMMR[key].mvpwins !== player.mvpwins) {
+
+                let totalMMR = resetMMR;
+                let preMMR = 0;
+
+                for (let i = 0; i < player.wins; i++) {
+                    preMMR += (Math.random() < 0.5) ? 6 : 7;
+                }
+                for (let i = 0; i < player.losses; i++) {
+                    preMMR -= (Math.random() < 0.5) ? 5 : 6;
+                }
+                for (let i = 0; i < player.mvpwins; i++) {
+                    preMMR += (Math.random() < 0.5) ? 2 : 3;
+                }
+                totalMMR += preMMR;
+                player.MMR = totalMMR;
+
+                // Store new MMR data
+                storedMMR[key] = {
+                    wins: player.wins,
+                    losses: player.losses,
+                    mvpwins: player.mvpwins,
+                    MMR: player.MMR
+                };
+
+                console.log(`${player.name} has a new Elo of: ${player.MMR}`);
+            } else {
+                // Load stored MMR if no changes
+                player.MMR = storedMMR[key].MMR;
+                console.log(`${player.name} retains Elo of: ${player.MMR}`);
             }
-        for (let i = 0; i < player.losses; i++) {
-                const loseElo = (Math.random() < 0.5) ? 5 : 6;
-                preMMR -= loseElo;
-        }
-        for (let i = 0; i < player.mvpwins; i++) {
-                const mvpElo = (Math.random() < 0.5) ? 7 : 8;
-                preMMR += mvpElo;
-        }
-        totalMMR += preMMR;
-        preMMR = 0;
-
-        player.MMR = totalMMR
-        console.log(`${player.name} has an Elo of: ${player.MMR}`);
-
-    });
+        });
+         // Save updated MMR data to localStorage
+         localStorage.setItem('playerMMR', JSON.stringify(storedMMR));
         document.getElementById("Camico").innerHTML = `Camico - MMR: ${players[0].MMR}`;
         document.getElementById("Estibar").innerHTML = `Estibar - MMR: ${players[1].MMR}`;
         document.getElementById("Novel").innerHTML = `Novel - MMR: ${players[2].MMR}`;
@@ -999,13 +1092,16 @@
         document.getElementById("_-matador").innerHTML = `_-matador - MMR: ${players[80].MMR}`;
         document.getElementById("disco^^").innerHTML = `disco^^ - MMR: ${players[81].MMR}`;
         document.getElementById("fierro").innerHTML = `fierro - MMR: ${players[82].MMR}`;
+        }
+
+       
 
         function generateLeaderboard() {
             const leaderboard = document.getElementById("leaderboard");
-            leaderboard.innerHTML = ""; 
-            
+            leaderboard.innerHTML = "";
+
             const sortedPlayers = players.sort((a, b) => b.MMR - a.MMR).slice(0, 20);
-            
+
             sortedPlayers.forEach((player, index) => {
                 const div = document.createElement("div");
                 div.classList.add("leaderboardbox");
@@ -1015,15 +1111,68 @@
         }
 
         document.addEventListener("DOMContentLoaded", generateLeaderboard);
-</script>
-<script src="script.js"></script>
+
+        function generateMatches() {
+            const matchesContainer = document.getElementById("matches");
+            matchesContainer.innerHTML = "";
+
+            const playersCopy = [...players];
+            playersCopy.sort((a, b) => b.MMR - a.MMR);
+
+            let matches = [];
+            for (let i = 0; i < 5 && playersCopy.length >= 4; i++) {
+                let matchSize = Math.random() < 0.5 ? 2 : 3;
+                if (playersCopy.length < matchSize * 2) break;
+
+                let blueTeam = playersCopy.splice(0, matchSize);
+                let orangeTeam = playersCopy.splice(0, matchSize);
+
+                matches.push({ blueTeam, orangeTeam });
+            }
+
+            matches.forEach((match, index) => {
+                const div = document.createElement("div");
+                div.classList.add("box");
+                div.innerHTML = `<strong>Match ${index + 1}</strong><br>
+                    <span style='color: #00aaff'>Blue Team:</span> ${match.blueTeam.map(p => ' ' + p.name + ' ' + p.MMR).join(', ')}<br>
+                    <span style='color: #ff4500'>Orange Team:</span> ${match.orangeTeam.map(p => ' ' + p.name + ' ' + p.MMR).join(', ')}`;
+                matchesContainer.appendChild(div);
+            });
+        }
+
+        function displayMatches(matches) {
+            const matchesContainer = document.getElementById("matches");
+            matchesContainer.innerHTML = "";
+            matches.forEach((match, index) => {
+                const div = document.createElement("div");
+                div.classList.add("box");
+                div.innerHTML = `<strong>Match ${index + 1}</strong><br>
+                    <span style='color: #00aaff'>Blue Team:</span> ${match.blueTeam.map(p => ' ' + p.name + ' ' + p.MMR).join(', ')}<br>
+                    <span style='color: #ff4500'>Orange Team:</span> ${match.orangeTeam.map(p => ' ' + p.name + ' ' + p.MMR).join(', ')}`;
+                matchesContainer.appendChild(div);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", generateMatches);
+        setInterval(() => {
+            let now = new Date();
+            if (now.getHours() === 0 && now.getMinutes() === 0) {
+                generateMatches();
+            }
+        }, 60000);
+
+
+    </script>
+
+    <script src="script.js"></script>
+
     <script>
         function switchTab(tabName) {
             document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
             document.querySelectorAll('.content').forEach(content => content.classList.remove('active'));
             document.querySelectorAll('.leaderboardcont').forEach(content => content.classList.remove('active'));
-            
-            
+
+
             document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
             document.getElementById(tabName).classList.add('active');
         }
@@ -1032,6 +1181,7 @@
         // Polyfill for flag emojis:
         import { polyfillCountryFlagEmojis } from "https://cdn.skypack.dev/country-flag-emoji-polyfill";
         polyfillCountryFlagEmojis();
-      </script>
+    </script>
 </body>
+
 </html>
