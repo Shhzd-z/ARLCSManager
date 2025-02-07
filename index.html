@@ -378,6 +378,7 @@
                     <li>Rogue 🇬🇧</li>
                     <li>Char 🇳🇱 </li>
                     <li>Fressco 🇫🇷</li>
+                    <li>fierro 🇪🇸</li>
                 </ul>
             </div>
         </div>
@@ -789,6 +790,11 @@
                 <p>Team: Bomboclat Esports</p>
             </div>
             <div class="box">
+                <strong id="fierro"></strong>
+                <hr>
+                <p>Team: Bomboclat Esports</p>
+            </div>
+            <div class="box">
                 <strong id="disco^^"></strong>
                 <hr>
                 <p> </p>
@@ -883,7 +889,8 @@
             { name: "Char", wins: 0, losses: 2, mvpwins: 1, },
             { name: "Fressco", wins: 1, losses: 2, mvpwins: 0, },
             { name: "_-matador", wins: 1, losses: 0, mvpwins: 0, },
-            { name: "disco^^", wins: 0, losses: 1, mvpwins: 0, }
+            { name: "disco^^", wins: 0, losses: 1, mvpwins: 0, },
+            { name: "fierro", wins: 0, losses: 0, mvpwins: 0, }
         ];
     const resetMMR = 2000;
     const maxRedux = 2450;
@@ -991,6 +998,7 @@
         document.getElementById("Fressco").innerHTML = `Fressco - MMR: ${players[79].MMR}`;
         document.getElementById("_-matador").innerHTML = `_-matador - MMR: ${players[80].MMR}`;
         document.getElementById("disco^^").innerHTML = `disco^^ - MMR: ${players[81].MMR}`;
+        document.getElementById("fierro").innerHTML = `fierro - MMR: ${players[82].MMR}`;
 
         function generateLeaderboard() {
             const leaderboard = document.getElementById("leaderboard");
