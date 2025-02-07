@@ -788,6 +788,11 @@
                 <hr>
                 <p>Team: Bomboclat Esports</p>
             </div>
+            <div class="box">
+                <strong id="disco^^"></strong>
+                <hr>
+                <p> </p>
+            </div>
         </div>
         <div id="leaderboard" class="leaderboardcont">
             <!-- Leaderboard will be generated here. -->
@@ -868,16 +873,17 @@
             { name: "Fortress", wins: 0, losses: 0, mvpwins: 0, },
             { name: "Insurrectionist", wins: 0, losses: 0, mvpwins: 0, },
             { name: "Earthmover", wins: 0, losses: 0, mvpwins: 0, },
-            { name: "Naf", wins: 1, losses: 1, mvpwins: 0, },
-            { name: "Manual", wins: 0, losses: 1, mvpwins: 1, },
-            { name: "Mejor!", wins: 1, losses: 1, mvpwins: 0, },
+            { name: "Naf", wins: 2, losses: 1, mvpwins: 0, },
+            { name: "Manual", wins: 0, losses: 1, mvpwins: 2, },
+            { name: "Mejor!", wins: 2, losses: 1, mvpwins: 0, },
             { name: "complex", wins: 0, losses: 0, mvpwins: 0, },
             { name: "nivO", wins: 0, losses: 0, mvpwins: 0, },
             { name: "Tky", wins: 0, losses: 0, mvpwins: 0, },
-            { name: "Rogue", wins: 1, losses: 1, mvpwins: 0, },
-            { name: "Char", wins: 0, losses: 1, mvpwins: 1, },
-            { name: "Fressco", wins: 1, losses: 1, mvpwins: 0, },
-            { name: "_-matador", wins: 0, losses: 0, mvpwins: 0, }
+            { name: "Rogue", wins: 1, losses: 2, mvpwins: 0, },
+            { name: "Char", wins: 0, losses: 2, mvpwins: 1, },
+            { name: "Fressco", wins: 1, losses: 2, mvpwins: 0, },
+            { name: "_-matador", wins: 1, losses: 0, mvpwins: 0, },
+            { name: "disco^^", wins: 0, losses: 1, mvpwins: 0, }
         ];
     const resetMMR = 2000;
     const maxRedux = 2450;
@@ -984,6 +990,7 @@
         document.getElementById("Char").innerHTML = `Char - MMR: ${players[78].MMR}`;
         document.getElementById("Fressco").innerHTML = `Fressco - MMR: ${players[79].MMR}`;
         document.getElementById("_-matador").innerHTML = `_-matador - MMR: ${players[80].MMR}`;
+        document.getElementById("disco^^").innerHTML = `disco^^ - MMR: ${players[81].MMR}`;
 
         function generateLeaderboard() {
             const leaderboard = document.getElementById("leaderboard");
