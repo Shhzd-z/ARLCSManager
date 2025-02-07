@@ -359,6 +359,7 @@
                     <li>Naf 🇸🇦</li>
                     <li>Manual 🇪🇸</li>
                     <li>Mejor! 🇪🇸</li>
+                    <li>_-matador 🇪🇸</li>
                 </ul>
             </div>
             <div class="box">
@@ -753,6 +754,11 @@
                 <p>Team: Razer</p>
             </div>
             <div class="box">
+                <strong id="_-matador"></strong>
+                <hr>
+                <p>Team: Razer</p>
+            </div>
+            <div class="box">
                 <strong id="complex"></strong>
                 <hr>
                 <p>Team: EVO</p>
@@ -871,6 +877,7 @@
             { name: "Rogue", wins: 0, losses: 0, mvpwins: 0, },
             { name: "Char", wins: 0, losses: 0, mvpwins: 0, },
             { name: "Fressco", wins: 0, losses: 0, mvpwins: 0, }
+            { name: "_-matador", wins: 0, losses: 0, mvpwins: 0, }
         ];
     const resetMMR = 2000;
     const maxRedux = 2450;
@@ -976,6 +983,7 @@
         document.getElementById("Rogue").innerHTML = `Rogue - MMR: ${players[77].MMR}`;
         document.getElementById("Char").innerHTML = `Char - MMR: ${players[78].MMR}`;
         document.getElementById("Fressco").innerHTML = `Fressco - MMR: ${players[79].MMR}`;
+        document.getElementById("_-matador").innerHTML = `_-matador - MMR: ${players[80].MMR}`;
 
         function generateLeaderboard() {
             const leaderboard = document.getElementById("leaderboard");
